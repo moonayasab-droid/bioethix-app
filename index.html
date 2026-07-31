@@ -3,20 +3,20 @@
   <meta charset=UTF-8>
   <meta name="viewport" content="width, initial-scale=1.0"
   <title>BioEthix Assistant</title>
+  <link rel="stylesheet" href="style.css"
 </head>
+
 <body>
-  
   <header> 
-    <h1>BioEthix & medlaw Assistant<h1> 
+    <h1>BioEthix & medlaw Assistant</h1> 
      <p>Exploring ethics, law, and
         technology in modern healthcare.</p>
      </header>
 
      <main>
-
-      <section id="search-section">
+       <section id="search-section">
        <input type="text" placeholder="search case studies (e.g., Robotics, Dental, AI)...">
-       <buttom>search</buttom>
+       <button>search</button>
       </section>
 
       <section id="cases-container">
@@ -31,3 +31,82 @@
 
      </body>
      </html>
+
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioEthix & MedLaw Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>BioEthix & MedLaw Assistant</h1>
+            <p>Exploring ethics, law, and technology in modern healthcare.</p>
+        </header>
+
+        <!-- Live Search Section -->
+        <section class="search-section">
+            <h2>Search Case Studies</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search case studies (e.g., AI, Consent, Robotics)...">
+                <button type="button" id="search-btn">Search</button>
+            </div>
+
+            <div class="case-grid" id="case-grid">
+                <!-- Case 1 -->
+                <div class="card case-card">
+                    <h3>Autonomous Surgical Robotics in Dental Practice</h3>
+                    <p><strong>Category:</strong> Robotics & Dentistry</p>
+                    <p>Evaluating liability and patient consent when robotics systems perform invasive procedures.</p>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="card case-card">
+                    <h3>Pediatric Blood Transfusion Refusal</h3>
+                    <p><strong>Category:</strong> Autonomy & Pediatrics</p>
+                    <p>Evaluating parental proxy rights versus pediatric assent when lifesaving blood products are declined on religious grounds.</p>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="card case-card">
+                    <h3>Diagnostic AI Error & Malpractice Liability</h3>
+                    <p><strong>Category:</strong> AI Governance & MedLaw</p>
+                    <p>Exploring clinician liability when relying on an autonomous AI triage algorithm that yields a misdiagnosis.</p>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label for="scenario-details"><strong>Case Summary & Key Dilemma:</strong></label>
+                    <textarea id="scenario-details" rows="4" placeholder="Describe the medical law or ethics conflict here..." style="margin-top: 0.5rem;"></textarea>
+                </div>
+
+                <button type="submit">Analyze Case</button>
+            </form>
+
+            <div id="feedback-output" style="margin-top: 1.5rem;"></div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+<textarea id="case-textarea" placeholder="Describe the medical law or ethics conflict here..."></textarea>
+<button type="button" id="analyze-btn">Analyze Case</button>
+
+<!-- Add a place to show the analysis result right below it -->
+<div id="analysis-result" style="margin-top: 15px; font-weight: bold; color: #1a365d;"></div>
+
+<div class="card">
+    <h3>AI Diagnostic Accuracy & Malpractice</h3>
+    <p><strong>Category:</strong> Artificial Intelligence & Law</p>
+    <p>Analyzing healthcare provider liability when automated AI imaging algorithms fail to detect early pathologies.</p>
+</div>
+
+<div class="card">
+    <h3>Patient Data Privacy in Smart Dental Clinics</h3>
+    <p><strong>Category:</strong> Cybersecurity & Ethics</p>
+    <p>Exploring HIPAA compliance and ethical data sharing standards for cloud-connected dental diagnostic equipment.</p>
+</div>
