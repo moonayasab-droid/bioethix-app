@@ -555,3 +555,104 @@ function submitFeedback(event) {
   document.getElementById("feedback-status").style.display = "block";
   document.getElementById("feedback-form").reset();
 }
+
+const caseStudies = [
+  {
+    id: "surgical-robotics",
+    title: "Autonomous Surgical Robotics in Dental Practice",
+    category: "Robotics & AI",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures autonomously.",
+    background: "During a routine implant procedure, an autonomous robotic guidance unit experienced a sub-millimeter calibration error, resulting in minor soft tissue trauma.",
+    dilemma: "Balancing the technological efficiency and precision of autonomous systems against physician oversight and duty of care.",
+    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"],
+    principles: {
+      autonomy: "Did the patient consent specifically to autonomous execution versus human-guided AI assistance?",
+      beneficence: "Robotic systems offer superior mechanical accuracy and lower procedural fatigue.",
+      nonMaleficence: "Risk of unexpected mechanical failure, software bugs, or latent calibration drift.",
+      justice: "High technological costs could restrict access exclusively to affluent urban clinics."
+    },
+    legal: "Key questions focus on whether injuries fall under medical malpractice (clinician negligence) or strict product liability (manufacturer error).",
+    arguments: {
+      pro: "The clinician selected and supervised the technology, maintaining ultimate duty of care to intervene.",
+      con: "The software operating as a 'black box' places liability on the developer for unanticipated algorithm behavior."
+    },
+    questions: [
+      "At what threshold of software autonomy does a clinician cease to be legally responsible for execution error?",
+      "How should informed consent forms explicitly detail AI algorithmic risk?"
+    ],
+    sources: [
+      "WHO Guidance on Governance of AI for Health",
+      "AMA Code of Medical Ethics: Autonomous Systems in Practice"
+    ]
+  },
+  {  
+  id: "pediatric-transfusion",
+    title: "Pediatric Blood Transfusion Refusal",
+    category: "Pediatrics & Law",
+    summary: "Evaluating parental proxy decision-making versus pediatric assent during critical care.",
+    background: "Parents refuse a lifesaving blood transfusion for a 12-year-old child experiencing severe acute anemia based on fundamental religious convictions.",
+    dilemma: "Reconciling constitutional protections for parental religious freedoms with the state's interest in preserving the life of a minor.",
+    stakeholders: ["Pediatric Patient", "Parents / Guardians", "Attending Physicians", "Hospital Ethics Committee"],
+    principles: {
+      autonomy: "Parental proxy rights versus the developing autonomy and personal assent of the minor.",
+      beneficence: "Administering transfusion prevents imminent biological harm and death.",
+      nonMaleficence: "Failure to intervene leads to preventable mortality; forced treatment creates familial psychological trauma.",
+      justice: "Consistent legal application of state protection over vulnerable minors."
+    },
+    legal: "Established legal doctrine holds that parental authority does not grant the right to withhold life-saving care from a minor in immediate life-threatening situations.",
+    arguments: {
+      pro: "The state has a compelling interest (parens patriae) to override parental refusal to protect minor life.",
+      con: "Parental autonomy in fundamental religious and medical choices must remain protected from excessive state intrusion."
+    },
+    questions: [
+      "At what age or developmental stage should a minor's refusal or assent override parental directives?",
+      "How can medical teams balance immediate interventions with long-term trust in clinical settings?"
+    ],
+    sources: [
+      "American Academy of Pediatrics Guidelines on Refusal of Treatment",
+      "UN Convention on the Rights of the Child (Article 24)"
+    ]
+  }
+];
+function openCaseModal(caseId) {
+  const item = caseStudies.find(c => c.id === caseId);
+  if (!item) return;
+
+  document.getElementById("modal-title").innerText = item.title;
+  document.getElementById("modal-category").innerText = item.category;
+
+  const body = document.getElementById("modal-body");
+  body.innerHTML = `
+    <hr style="margin: 1rem 0;">
+    <p><strong>Case Background:</strong> ${item.background}</p>
+    <p><strong>Core Dilemma:</strong> ${item.dilemma}</p>
+    <p><strong>Key Stakeholders:</strong> ${item.stakeholders.join(", ")}</p>
+    
+    <h4 style="margin-top:1.2rem; color:#0056b3;">Ethical Principles Breakdown</h4>
+    <ul>
+      <li><strong>Autonomy:</strong> ${item.principles.autonomy}</li>
+      <li><strong>Beneficence:</strong> ${item.principles.beneficence}</li>
+      <li><strong>Non-Maleficence:</strong> ${item.principles.nonMaleficence}</li>
+      <li><strong>Justice:</strong> ${item.principles.justice}</li>
+    </ul>
+
+    <h4 style="margin-top:1.2rem; color:#0056b3;">Legal Considerations</h4>
+    <p>${item.legal}</p>
+
+    <h4 style="margin-top:1.2rem; color:#0056b3;">Perspective Arguments</h4>
+    <p><strong>Clinician/State Perspective:</strong> ${item.arguments.pro}</p>
+    <p><strong>Developer/Parent Perspective:</strong> ${item.arguments.con}</p>
+
+    <h4 style="margin-top:1.2rem; color:#0056b3;">Discussion Questions</h4>
+    <ul>
+      ${item.questions.map(q => `<li>${q}</li>`).join("")}
+    </ul>
+
+    <h4 style="margin-top:1.2rem; color:#0056b3;">Academic Sources & Further Reading</h4>
+    <ul>
+      ${item.sources.map(s => `<li>${s}</li>`).join("")}
+    </ul>
+  `;
+
+  document.getElementById("case-modal").style.display = "flex";
+}
