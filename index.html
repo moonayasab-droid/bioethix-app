@@ -20,6 +20,53 @@
       <a href="about.html">About</a>
     </div>
 </nav>
+<!-- Interactive Debate Mode & Monthly Poll -->
+<section class="container" style="margin-top: 3rem; margin-bottom: 3rem;">
+  <h2>Ethics of the Month: August 2026</h2>
+  <div class="card" style="padding: 1.5rem; background: #f8f9fa; border-radius: 8px;">
+    <h3>Should a clinician be held legally liable when an autonomous AI triage algorithm yields a misdiagnosis?</h3>
+    <p>Cast your vote to see real-time community consensus, then examine the core arguments below.</p>
+    
+    <!-- Poll Options -->
+    <div id="poll-options" style="margin: 1.5rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <button class="btn" onclick="castVote('clinician')">Clinician Responsible</button>
+      <button class="btn" onclick="castVote('developer')">AI Developer Responsible</button>
+      <button class="btn" onclick="castVote('shared')">Shared Responsibility</button>
+    </div>
+
+    <!-- Poll Results (Hidden until voted) -->
+    <div id="poll-results" style="display: none; margin-top: 1rem;">
+      <h4>Community Vote Results:</h4>
+      <div style="margin-bottom: 0.5rem;">
+        <span>Clinician Responsible: <strong id="count-clinician">61%</strong></span>
+        <div class="progress-bar"><div id="bar-clinician" class="progress-fill" style="width: 61%;"></div></div>
+      </div>
+      <div style="margin-bottom: 0.5rem;">
+        <span>AI Developer Responsible: <strong id="count-developer">24%</strong></span>
+        <div class="progress-bar"><div id="bar-developer" class="progress-fill" style="width: 24%;"></div></div>
+      </div>
+      <div>
+        <span>Shared Responsibility: <strong id="count-shared">15%</strong></span>
+        <div class="progress-bar"><div id="bar-shared" class="progress-fill" style="width: 15%;"></div></div>
+      </div>
+    </div>
+
+    <hr style="margin: 1.5rem 0;">
+
+    <!-- Dual Argument Breakdown -->
+    <h3>Debate Breakdown: Key Perspectives</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+      <div style="border-left: 4px solid #0056b3; padding-left: 1rem;">
+        <h4 style="color: #0056b3;">ARGUMENT A: Clinician Liability</h4>
+        <p>The clinician retains ultimate duty of care. Delegating final diagnostic execution to an unverified software algorithm without independent verification breaches standard clinical duty.</p>
+      </div>
+      <div style="border-left: 4px solid #28a745; padding-left: 1rem;">
+        <h4 style="color: #28a745;">ARGUMENT B: Developer / Product Liability</h4>
+        <p>If an autonomous system operates as a 'black box' whose inner operations are unexplainable, liability shifts toward strict product liability for software failure rather than human negligence.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer class="site-footer">
   <div class="container">

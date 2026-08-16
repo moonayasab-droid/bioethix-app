@@ -526,3 +526,26 @@ async function analyzeCustomCase() {
     output.innerText = "API endpoint not connected yet. System prompt is structured and ready for backend integration.";
   }
 }
+
+// Ethics Poll Interactive Voting Engine
+let votes = { clinician: 61, developer: 24, shared: 15 };
+
+function castVote(option) {
+  votes[option] += 1;
+  const total = votes.clinician + votes.developer + votes.shared;
+
+  const clinicianPct = Math.round((votes.clinician / total) * 100);
+  const developerPct = Math.round((votes.developer / total) * 100);
+  const sharedPct = Math.round((votes.shared / total) * 100);
+
+  document.getElementById("count-clinician").innerText = clinicianPct + "%";
+  document.getElementById("count-developer").innerText = developerPct + "%";
+  document.getElementById("count-shared").innerText = sharedPct + "%";
+
+  document.getElementById("bar-clinician").style.width = clinicianPct + "%";
+  document.getElementById("bar-developer").style.width = developerPct + "%";
+  document.getElementById("bar-shared").style.width = sharedPct + "%";
+
+  document.getElementById("poll-options").style.display = "none";
+  document.getElementById("poll-results").style.display = "block";
+}
