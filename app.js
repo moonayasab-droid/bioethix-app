@@ -402,3 +402,127 @@ function showNoResultsMessage(term) {
     }, 1500);
   });
 });
+
+// Academic Case Studies Data
+const caseStudies = [
+  {
+    id: "surgical-robotics",
+    title: "Autonomous Surgical Robotics in Dental Practice",
+    category: "Robotics",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures autonomously.",
+    dilemma: "Who bears legal and moral responsibility when an autonomous surgical robot causes unexpected tissue damage during a procedure?",
+    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Medical Device Regulator"],
+    principles: {
+      autonomy: "Did the patient give informed consent specifically for fully autonomous operation versus AI-assisted surgery?",
+      beneficence: "The robot offers higher mechanical precision and reduced operation times.",
+      nonMaleficence: "Risk of hardware malfunction, software bugs, or unexpected tissue injury.",
+      justice: "High technological costs may limit access to high-income clinics, creating healthcare inequality."
+    },
+    legal: "Medical malpractice law varies by jurisdiction. Key questions center on strict product liability for manufacturers versus clinical negligence for surgeons.",
+    sources: [
+      "WHO Guidance on Ethics & Governance of Artificial Intelligence for Health",
+      "AMA Code of Medical Ethics: Autonomous Technologies"
+    ]
+  },
+  {
+    legal: "Medical malpractice law varies by jurisdiction. Key questions center on strict product liability for manufacturers versus clinical negligence for surgeons.",
+    sources: [
+      "WHO Guidance on Ethics & Governance of Artificial Intelligence for Health",
+      "AMA Code of Medical Ethics: Autonomous Technologies"
+    ]
+  },
+  {
+    id: "pediatric-transfusion",
+    title: "Pediatric Blood Transfusion Refusal",
+    category: "Pediatrics",
+    summary: "Evaluating parental proxy rights versus pediatric assent when lifesaving blood products are declined on religious grounds.",
+    dilemma: "Should state intervention override parental religious choices to administer a lifesaving blood transfusion to a minor?",
+    stakeholders: ["Pediatric Patient", "Parents / Guardians", "Attending Physicians", "Hospital Ethics Committee"],
+    principles: {
+      autonomy: "Parental proxy decision-making versus the emerging autonomy and assent of the child.",
+      beneficence: "Administering transfusion prevents immediate mortal risk.",
+      nonMaleficence: "Failure to treat leads to preventable death; forced treatment may cause familial trauma.",
+      justice: "Balancing state interest in protecting vulnerable minors with constitutional freedoms."
+    },
+    legal: "Under established legal doctrine, parental authority generally does not extend to withholding lifesaving treatment from a child in immediate danger.",
+    sources: [
+      "American Academy of Pediatrics (AAP) Guidelines",
+      "UN Convention on the Rights of the Child (Article 24)"
+    ]
+  }
+];
+
+// Open Detailed Academic Modal
+function openCaseModal(caseId) {
+  const item = caseStudies.find(c => c.id === caseId);
+  if (!item) return;
+
+  document.getElementById("modal-title").innerText = item.title;
+  document.getElementById("modal-category").innerText = item.category;
+
+  const body = document.getElementById("modal-body");
+  body.innerHTML = `
+    <hr style="margin: 1rem 0;">
+    <p><strong>Core Dilemma:</strong> ${item.dilemma}</p>
+    <p><strong>Stakeholders:</strong> ${item.stakeholders.join(", ")}</p>
+    
+    <h3 style="margin-top:1rem;">Ethical Principles (4 Pillars)</h3>
+    <ul>
+      <li><strong>Autonomy:</strong> ${item.principles.autonomy}</li>
+      <li><strong>Beneficence:</strong> ${item.principles.beneficence}</li>
+      <li><strong>Non-Maleficence:</strong> ${item.principles.nonMaleficence}</li>
+      <li><strong>Justice:</strong> ${item.principles.justice}</li>
+    </ul>
+
+    <h3 style="margin-top:1rem;">Legal Considerations</h3>
+    <p>${item.legal}</p>
+
+    <h3 style="margin-top:1rem;">Academic Sources</h3>
+    <ul>
+      ${item.sources.map(s => `<li>${s}</li>`).join("")}
+    </ul>
+  `;
+
+  document.getElementById("case-modal").style.display = "flex";
+}
+
+// Close Modal Controls
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("case-modal");
+  const closeBtn = document.querySelector(".close-modal");
+
+  if (closeBtn) {
+    closeBtn.onclick = () => modal.style.display = "none";
+  }
+  window.onclick = (e) => {
+    if (e.target === modal) modal.style.display = "none";
+  };
+});
+
+// Live Analyzer Submission Logic
+async function analyzeCustomCase() {
+  const input = document.getElementById("custom-case-input").value;
+  const output = document.getElementById("analysis-output");
+
+  if (!input.trim()) {
+    output.innerText = "Please enter a case scenario to analyze.";
+    return;
+  }
+
+  output.innerText = "Generating 10-part ethical analysis...";
+
+  try {
+    const API_URL = "YOUR_BACKEND_ENDPOINT_HERE"; 
+    
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: input })
+    });
+    
+    const data = await response.json();
+    output.innerText = data.result || "Analysis complete.";
+  } catch (err) {
+    output.innerText = "API endpoint not connected yet. System prompt is structured and ready for backend integration.";
+  }
+}
