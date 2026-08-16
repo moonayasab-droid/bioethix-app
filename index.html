@@ -67,7 +67,18 @@
     </div>
   </div>
 </section>
- 
+ <!-- Academic Case Study Modal -->
+<div id="case-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="modal-title">Case Title</h2>
+    <p><strong>Category:</strong> <span id="modal-category"></span></p>
+    <div id="modal-body">
+      <!-- Dynamic Case Analysis Injected Here -->
+    </div>
+  </div>
+  
+</div>
 <footer class="site-footer">
   <div class="container">
     <p><strong>BioEthix & MedLaw Assistant</strong> — Where medicine, law, ethics, and technology meet.</p>
@@ -213,3 +224,20 @@
     </form>
   </div>
 </section>
+
+
+<!-- Card 1: Autonomous Surgical Robotics -->
+<div class="card">
+  <h3>Autonomous Surgical Robotics in Dental Practice</h3>
+  <span class="tag">Robotics</span>
+  <p>Evaluating liability and patient consent when robotic systems perform invasive procedures autonomously.</p>
+  <button class="btn-link" onclick="openCaseModal('surgical-robotics')">Read more</button>
+</div>
+
+<!-- Card 2: Pediatric Blood Transfusion Refusal -->
+<div class="card">
+  <h3>Pediatric Blood Transfusion Refusal</h3>
+  <span class="tag">Pediatrics</span>
+  <p>Evaluating parental proxy rights versus pediatric assent when lifesaving blood products are declined on religious grounds.</p>
+  <button class="btn-link" onclick="openCaseModal('pediatric-transfusion')">Read more</button>
+</div>
