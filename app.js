@@ -549,3 +549,9 @@ function castVote(option) {
   document.getElementById("poll-options").style.display = "none";
   document.getElementById("poll-results").style.display = "block";
 }
+
+function submitFeedback(event) {
+  event.preventDefault();
+  document.getElementById("feedback-status").style.display = "block";
+  document.getElementById("feedback-form").reset();
+}
