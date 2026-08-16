@@ -51,16 +51,18 @@
         <!-- Analyze Case Section -->
         <section class="analysis-section" style="margin-top: 2rem;">
             <h2>Analyze a Custom Case</h2>
-            <div style="margin-bottom: 1rem;">
-                <label for="scenario-details"><strong>Case Summary & Key Dilemma:</strong></label>
-                <textarea id="scenario-details" rows="4" placeholder="Describe the medical law or ethics conflict here..." style="width: 100%; margin-top: 0.5rem; padding: 10px;"></textarea>
-            </div>
+        <div style="margin-bottom: 1rem;">
+  <label for="scenarioInput"><strong>Case Summary & Key Dilemma:</strong></label>
+  <textarea id="scenarioInput" rows="4" placeholder="Describe the medical law or ethics conflict here..."></textarea>
+</div>
 
-            <div class="button-group">
-                <button type="button" id="analyze-btn">Analyze Case</but             
+<div class="button-group">
+  <button id="analyzeBtn" class="btn btn-primary" type="button">Analyze Case</button>
+  <button id="clearBtn" class="btn btn-secondary" type="button">Clear</button>
+</div>
         
-                <button type="button" id="clear-case-btn" class="secondary-btn">Clear</button>
-            </div>
+    
+
 
             <div id="feedback-output" style="margin-top: 1.5rem;"></div>
         </section>

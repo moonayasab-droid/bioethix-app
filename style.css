@@ -342,3 +342,18 @@ body {
   h1 { font-size: 1.8rem; }
   h2 { font-size: 1.4rem; }
 }
+
+/* Add gap and alignment between the buttons */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* Fix top navigation spacing */
+nav a, .nav-links a {
+  margin-right: 18px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 4px 8px;
+}
