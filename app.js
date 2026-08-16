@@ -66,11 +66,117 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setThemeFromTime();
+  // Inside DOMContentLoaded:
+    if (analyzeBtn) {
+      analyzeBtn.addEventListener('click', async () => {
+        const scenarioText = scenarioInput.value.trim();
+        
+        if (!scenarioText) {
+          alert('Please enter a scenario to analyze.')
+          return; // 
+        }
 
+      document.addEventListener('DOMContentLoaded', () => {
+  // Grab DOM elements
+  const analyzeBtn = document.getElementById('analyzeBtn'); // Make sure ID matches your HTML
+  const scenarioInput = document.getElementById('scenarioInput'); // Make sure ID matches your HTML
+  const feedbackOutput = document.getElementById('feedbackOutput'); // Make sure ID matches your HTML
+
+  setThemeFromTime();
+
+  // Validate that required UI elements exist on the page
   if (!analyzeBtn || !scenarioInput || !feedbackOutput) {
     console.error('Required analysis elements are missing.');
     return;
   }
+
+  // Handle button click for analysis
+  analyzeBtn.addEventListener('click', async () => {
+    const scenarioText = scenarioInput.value.trim();
+
+    // Check if user entered text before proceeding
+    if (!scenarioText) {
+      alert('Please enter a scenario to analyze.');
+      return;
+    }
+
+    // 1. Define your system prompt
+    const systemPrompt = `You are an expert Bioethics & Medical Law AI Assistant.
+Analyze the provided scenario systematically using the following 10-part framework.
+Format each section with clear Markdown headers (e.g., ### Section Name) and bullet points:
+
+1. ### Primary Ethical Dilemma
+State the core tension clearly in 1-2 sentences.
+
+2. ### Key Stakeholders
+List all affected parties (e.g., patient, family, clinicians, institution, public).
+
+3. ### Four Principles of Biomedical Ethics
+- **Autonomy:**
+- **Beneficence:**
+- **Non-Maleficence:**
+- **Justice:**
+
+4. ### Relevant Legal Questions & Frameworks
+Key statutory, regulatory, or liability considerations.
+
+5. ### Arguments FOR Action
+Key ethical/legal reasons supporting the primary proposed course.
+
+6. ### Arguments AGAINST Action
+Key ethical/legal reasons opposing the primary proposed course.
+
+7. ### Potential Compromises / Alternative Options
+Middle-ground solutions, policy adjustments, or ethics committee recommendations.
+
+8. ### Recommended Action / Next Steps
+A clear, justified resolution path.
+
+9. ### Key Policy or Precedent References
+Relevant landmark cases, laws, or professional guidelines (e.g., HIPAA, Common Rule).
+
+10. ### Educational Disclaimer
+Include a standard reminder that this analysis is for educational purposes only.`;
+
+    // 2. Display loading state in the output UI
+    feedbackOutput.textContent = 'Analyzing scenario...';
+
+    try {
+      // 3. Make the fetch request to your API or backend server
+      const response = await fetch('YOUR_API_ENDPOINT_HERE', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt: systemPrompt,
+          userScenario: scenarioText
+        })
+      });
+
+      const data = await response.json();
+
+      // 4. Render the result into feedbackOutput
+      feedbackOutput.innerHTML = data.result;
+
+    } catch (error) {
+      console.error('Error:', error);
+      feedbackOutput.textContent = 'Failed to analyze scenario. Please try again.';
+    }
+  });
+});
+
+// Helper functions outside DOMContentLoaded
+function showNoResultsMessage(term) {
+  const existingStatus = document.getElementById('search-status');
+  if (existingStatus) {
+    existingStatus.remove();
+  }
+}
+         
+
+        
+          
 
   function showNoResultsMessage(term) {
     const existingStatus = document.getElementById('search-status');
