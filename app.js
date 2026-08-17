@@ -1,9 +1,7 @@
-// Alias for onclick triggers
-function openCaseModal(id) {
-  openModal(id);
-}
-
-const additionalCaseStudies = [
+// -----------------------------
+// CASE STUDIES DATA
+// -----------------------------
+const caseStudies = [
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
@@ -11,7 +9,8 @@ const additionalCaseStudies = [
     summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures without direct real-time human supervision.",
     background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation. The operator did not override the system, leading to temporary nerve involvement.",
     dilemma: "Balancing technological efficiency and precision of autonomous systems against the imperative for clear human accountability and informed consent.",
-    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"]
+    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"],
+    sources: ["FDA Medical Device Guidance 2024", "Journal of Dental Ethics Vol. 12"]
   },
   {
     id: "pediatric-transfusion",
@@ -20,34 +19,18 @@ const additionalCaseStudies = [
     summary: "Evaluating parental proxy rights versus pediatric assent when managing life-threatening emergencies.",
     background: "A 14-year-old patient requires a blood transfusion during surgery, but parents refuse based on religious grounds.",
     dilemma: "Determining state intervention boundaries when parental beliefs conflict with life-saving care.",
-    stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"]
+    stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"],
+    sources: ["American Academy of Pediatrics Ethics 2023"]
   }
 ];
 
-const caseStudies = additionalCaseStudies;
-  {
-    id: "surgical-robotics",
-    title: "Autonomous Surgical Robotics in Dental Practice",
-    category: "Robotics & AI",
-    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures.",
-    background: "During a routine implant procedure, an autonomous robotic guidance system experienced a micro-software lag...",
-    dilemma: "Balancing the technological efficiency and precision of autonomous devices with human oversight...",
-    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer"],
-    principles: {
-      autonomy: "Did the patient consent specifically to autonomous execution?",
-      beneficence: "Robotic accuracy reduces human error margins.",
-      nonMaleficence: "Risk of software glitches causing physical harm.",
-      justice: "High-cost technology may limit equal access."
-    },
-    questions: [
-      "Should clinicians be allowed to override real-time robotic adjustments?",
-      "Who bears primary liability if an unrecorded software glitch causes injury?"
-    ],
-    sources: ["FDA Medical Device Guidance 2024", "Journal of Dental Ethics Vol. 12"]
-  }
-];
+// -----------------------------
+// OPEN MODAL
+// -----------------------------
+function openCaseModal(id) {
+  openModal(id);
+}
 
-// Open modal function
 function openModal(id) {
   const item = caseStudies.find(c => c.id === id);
   if (!item) return;
@@ -64,7 +47,7 @@ function openModal(id) {
       <h4>Ethical Dilemma</h4>
       <p>${item.dilemma}</p>
       <h4>Key Stakeholders</h4>
-      <ul>${item.stakeholders.map(s => `<li>${s}</li>`).join("")}</ul> 
+      <ul>${item.stakeholders.map(s => `<li>${s}</li>`).join("")}</ul>
       <h4>Academic Sources & Further Reading</h4>
       <ul>${item.sources.map(s => `<li>${s}</li>`).join("")}</ul>
     `;
@@ -72,54 +55,64 @@ function openModal(id) {
   }
 }
 
-// Push additional cases into main array
-if (typeof caseStudies !== 'undefined') {
-  caseStudies.push(...additionalCaseStudies);
-}
-// Function for Searching Cases
+// -----------------------------
+// SEARCH CASES
+// -----------------------------
 function searchCases() {
   console.log("Search executed");
   const query = document.getElementById('search-input')?.value.toLowerCase();
+  // You can add filtering logic here later
 }
 
-// Function for Resetting Filters
+// -----------------------------
+// RESET FILTERS
+// -----------------------------
 function resetFilters() {
   console.log("Filters reset");
   const searchInput = document.getElementById('search-input');
   if (searchInput) searchInput.value = '';
 }
 
-// Function for Analyzing Cases
+// -----------------------------
+// ANALYZE CASE
+// -----------------------------
 function analyzeCase() {
   console.log("Analyzing case...");
+  // Add your analysis logic later
 }
-// Initialize Event Listeners
+
+// -----------------------------
+// EVENT LISTENERS
+// -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Analyze Case Button
+  // Analyze Case Button
   const analyzeBtn = document.getElementById('analyze-btn');
   if (analyzeBtn) {
     analyzeBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (typeof analyzeCase === 'function') analyzeCase();
+      analyzeCase();
     });
   }
 
-  // 2. Search Cases Button
+  // Search Cases Button
   const searchBtn = document.getElementById('search-btn');
   if (searchBtn) {
     searchBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (typeof searchCases === 'function') searchCases();
+      searchCases();
     });
   }
 
-  // 3. Reset Filters Button
+  // Reset Filters Button
   const resetFiltersBtn = document.getElementById('reset-filters');
   if (resetFiltersBtn) {
     resetFiltersBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (typeof resetFilters === 'function') resetFilters();
+      resetFilters();
     });
   }
 });
+
+  
+
