@@ -556,7 +556,7 @@ function submitFeedback(event) {
   document.getElementById("feedback-form").reset();
 }
 
-const caseStudies = [
+const additionalCaseStudies = [
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
