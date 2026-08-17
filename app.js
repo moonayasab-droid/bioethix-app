@@ -702,5 +702,4 @@ document.addEventListener('DOMContentLoaded', () => {
       resetFilters(); // Runs your reset function
     });
   }
-
 });
