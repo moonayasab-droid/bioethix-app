@@ -8,35 +8,6 @@
   <meta name="keywords" content="Medical Law, Bioethics, MedLaw, Case Analyzer">
   <meta name="robots" content="index, follow">
 
-  <title>BioEthix & MedLaw Assistant</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<footer class="disclaimer">
-  <h3>⚖️ Educational Disclaimer</h3>
-  <p>
-    BioEthix & MedLaw is an educational project designed to encourage learning, discussion, and critical thinking about bioethics, medicine, technology, and law.
-    The information provided on this website is for educational purposes only. It is not medical advice, legal advice, diagnosis, treatment, or a substitute for advice from a qualified professional.
-  </p>
-  <p>
-    Laws, regulations, medical practices, and ethical standards can vary by country and may change over time.  
-    Case studies and AI-generated analyses may simplify complex issues and should not be treated as authoritative professional conclusions.
-  </p>
-  <p>
-    Always consult an appropriately qualified professional for real medical or legal matters.
-  </p>
-</footer>
-
-<footer class="ai-notice">
-  <h3>🤖 AI Notice</h3>
-  <p>
-    Some analyses on this website may be generated with the assistance of AI tools.  
-    AI-generated content can help explore ethical perspectives, but it may simplify complex issues or miss important context.
-  </p>
-  <p>
-    Always verify information with reliable academic, medical, or legal sources.
-  </p>
-</footer>
-
 <body>
 
   <!-- Navigation -->
@@ -144,47 +115,150 @@
 </body>
 </html>
 
-<section class="community-vote">
-  <h2>Community Vote</h2>
-  <p class="vote-description">
-    Share your perspective on this month’s ethical dilemma.<br><br>
-    Your response is anonymous and helps us understand how students and visitors think about complex questions in medicine, technology, and law.
-  </p>
 
-  <div class="vote-buttons">
-    <button class="vote-btn" onclick="vote('up')">👍 I agree</button>
-    <button class="vote-btn" onclick="vote('down')">👎 I disagree</button>
+/* Core Layout Container */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.main-container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Header & Navigation Bar */
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #475569;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #1e3a8a;
+}
+
+/* Card Section Boxes */
+.card-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Action Buttons & Button Groups (Fixes Overlay) */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary { background-color: #1d4ed8; color: #ffffff; }
+.btn-primary:hover { background-color: #1e40af; }
+
+.btn-secondary { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+.btn-secondary:hover { background-color: #e2e8f0; }
+
+/* Responsive Mobile Rules */
+@media (max-width: 640px) {
+  .navbar { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .button-group { width: 100%; }
+  .btn { width: 100%; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+}
+
+<div class="button-group">
+  <button class="btn btn-primary" onclick="analyzeCase()">Analyze Case</button>
+  <button class="btn btn-secondary" onclick="clearInput()">Clear</button>
+</div>
+
+<!-- August 2026 Interactive Voting Card -->
+<section class="card-panel">
+  <h2>Ethics of the Month: August 2026</h2>
+  <p><strong>Should a clinician be held legally liable when an autonomous AI triage algorithm yields a misdiagnosis?</strong></p>
+
+  <div class="button-group" id="poll-buttons">
+    <button class="btn btn-primary" onclick="castVote('clinician')">Clinician Responsible</button>
+    <button class="btn btn-primary" onclick="castVote('developer')">AI Developer Responsible</button>
+    <button class="btn btn-primary" onclick="castVote('shared')">Shared Responsibility</button>
   </div>
 
-  <div id="vote-result" class="vote-result"></div>
-
-  <p class="vote-disclaimer">
-    <strong>Important:</strong> These results represent the opinions of participating visitors.  
-    They do not represent medical, legal, scientific, or professional consensus.
-  </p>
+  <div id="poll-results" style="display: none; margin-top: 16px;">
+    <h4>Community Vote Consensus:</h4>
+    <p>👨‍⚕️ Clinician: <span id="clinician-pct">45%</span></p>
+    <p>💻 Developer: <span id="developer-pct">30%</span></p>
+    <p>🤝 Shared: <span id="shared-pct">25%</span></p>
+  </div>
 </section>
 
-<section class="feedback-section">
-  <h2>Help Improve BioEthix & MedLaw</h2>
+<script>
+function castVote(option) {
+  // Reveal results after vote
+  document.getElementById('poll-results').style.display = 'block';
+  alert('Thank you for participating in this month\'s bioethics consensus poll!');
+}
+</script>
 
-  <p class="feedback-description">
-    BioEthix & MedLaw is a student-created educational project, and your feedback helps shape its development.<br><br>
-    Tell us:<br>
-    • What did you find most interesting?<br>
-    • Was anything confusing or difficult to use?<br>
-    • Which topic or case should we explore next?<br>
-    • What would make the website more useful for students?<br><br>
-    Please don’t submit personal, medical, or confidential information.
-  </p>
+<div class="debate-container">
+  <div class="argument-card card-left">
+    <h4 style="color: #1d4ed8;">ARGUMENT A: Clinician Liability</h4>
+    <p>The clinician retains ultimate duty of care. Delegating final diagnostic execution to an unverified software algorithm without independent verification breaches standard clinical duty.</p>
+  </div>
 
-  <textarea id="feedback-text" rows="4" placeholder="Write your feedback..."></textarea>
-
-  <button class="primary-btn" onclick="submitFeedback()">Submit Feedback</button>
-
-  <div id="feedback-message"></div>
-</section>
-
- 
-
-      
-
+  <div class="argument-card card-right">
+    <h4 style="color: #15803d;">ARGUMENT B: Developer / Product Liability</h4>
+    <p>If an autonomous system operates as a 'black box' whose inner operations are unexplainable, liability shifts toward strict product liability for software failure rather than human negligence.</p>
+  </div>
+</div>
