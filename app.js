@@ -1,14 +1,15 @@
-// -----------------------------
+// --------------------------------------------------
 // CASE STUDIES DATA
-// -----------------------------
+// --------------------------------------------------
+
 const caseStudies = [
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
     category: "Robotics & AI",
-    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures without direct real-time human supervision.",
-    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation. The operator did not override the system, leading to temporary nerve involvement.",
-    dilemma: "Balancing technological efficiency and precision of autonomous systems against the imperative for clear human accountability and informed consent.",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures.",
+    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an error.",
+    dilemma: "Balancing technological efficiency and precision against patient safety and autonomy.",
     stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"],
     sources: ["FDA Medical Device Guidance 2024", "Journal of Dental Ethics Vol. 12"]
   },
@@ -16,17 +17,18 @@ const caseStudies = [
     id: "pediatric-transfusion",
     title: "Pediatric Blood Transfusion Refusal",
     category: "Pediatrics",
-    summary: "Evaluating parental proxy rights versus pediatric assent when managing life-threatening emergencies.",
-    background: "A 14-year-old patient requires a blood transfusion during surgery, but parents refuse based on religious grounds.",
+    summary: "Evaluating parental proxy rights versus pediatric assent when managing life-threatening situations.",
+    background: "A 14-year-old patient requires a blood transfusion during surgery, but parents refuse consent.",
     dilemma: "Determining state intervention boundaries when parental beliefs conflict with life-saving care.",
     stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"],
     sources: ["American Academy of Pediatrics Ethics 2023"]
   }
 ];
 
-// -----------------------------
-// OPEN MODAL
-// -----------------------------
+// --------------------------------------------------
+// OPEN & CLOSE MODALS
+// --------------------------------------------------
+
 function openCaseModal(id) {
   openModal(id);
 }
@@ -34,7 +36,6 @@ function openCaseModal(id) {
 function openModal(id) {
   const item = caseStudies.find(c => c.id === id);
   if (!item) return;
-
   const content = document.getElementById("modal-body");
   if (content) {
     content.innerHTML = `
@@ -51,70 +52,39 @@ function openModal(id) {
       <h4>Academic Sources & Further Reading</h4>
       <ul>${item.sources.map(s => `<li>${s}</li>`).join("")}</ul>
     `;
-    document.getElementById("case-modal").style.display = "flex";
+    const caseModal = document.getElementById("case-modal");
+    if (caseModal) caseModal.style.display = "flex";
   }
 }
 
-// -----------------------------
-// SEARCH CASES
-// -----------------------------
+// --------------------------------------------------
+// SEARCH & FILTER FUNCTIONS
+// --------------------------------------------------
+
 function searchCases() {
   console.log("Search executed");
-  const query = document.getElementById('search-input')?.value.toLowerCase();
-  // You can add filtering logic here later
+  const query = document.getElementById("search-input")?.value.toLowerCase();
 }
 
-// -----------------------------
-// RESET FILTERS
-// -----------------------------
 function resetFilters() {
   console.log("Filters reset");
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = '';
+  const searchInput = document.getElementById("search-input");
+  if (searchInput) searchInput.value = "";
 }
 
-// -----------------------------
-// ANALYZE CASE
-// -----------------------------
+// --------------------------------------------------
+// ANALYZER FUNCTION
+// --------------------------------------------------
+
 function analyzeCase() {
   console.log("Analyzing case...");
-  // Add your analysis logic later
 }
 
-// -----------------------------
-// EVENT LISTENERS
-// -----------------------------
-document.addEventListener('DOMContentLoaded', () => {
+// --------------------------------------------------
+// SYSTEM PROMPT CONFIGURATION
+// --------------------------------------------------
 
-  // Analyze Case Button
-  const analyzeBtn = document.getElementById('analyze-btn');
-  if (analyzeBtn) {
-    analyzeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      analyzeCase();
-    });
-  }
-
-  // Search Cases Button
-  const searchBtn = document.getElementById('search-btn');
-  if (searchBtn) {
-    searchBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      searchCases();
-    });
-  }
-
-  // Reset Filters Button
-  const resetFiltersBtn = document.getElementById('reset-filters');
-  if (resetFiltersBtn) {
-    resetFiltersBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetFilters();
-    });
-  }
-});
-
-  
+const SYSTEM_PROMPT = `
 You are an educational bioethics and medical law reasoning tool for BioEthix & MedLaw.
 When provided with a scenario, analyze it concisely using this exact 7-part output structure:
 
@@ -144,4 +114,38 @@ Provide 2 concise debate questions for students.
 7. Neutral Synthesis
 Provide a 1-2 sentence neutral conclusion.
 
-Keep all sections brief, objective, and clear. Do not use emojis
+Keep all sections brief, objective, and clear. Do not use emojis.
+`;
+
+// --------------------------------------------------
+// EVENT LISTENERS
+// --------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Analyze Case Button
+  const analyzeBtn = document.getElementById('analyze-btn');
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      analyzeCase();
+    });
+  }
+
+  // Search Cases Button
+  const searchBtn = document.getElementById('search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      searchCases();
+    });
+  }
+
+  // Reset Filters Button
+  const resetFiltersBtn = document.getElementById('reset-filters');
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetFilters();
+    });
+  }
+});

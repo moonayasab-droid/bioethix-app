@@ -1,3 +1,4 @@
+/* Global Reset & Base Styles */
 body {
   margin: 0;
   padding: 0;
@@ -53,6 +54,10 @@ body {
   font-size: 0.9rem;
 }
 
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
 .nav-right {
   display: flex;
   gap: 8px;
@@ -68,6 +73,10 @@ body {
   cursor: pointer;
 }
 
+.theme-btn:hover {
+  background: #cbd5e0;
+}
+
 /* Main Layout Cards */
 .main-content {
   max-width: 850px;
@@ -79,8 +88,8 @@ body {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 24px;
   margin-bottom: 24px;
+  padding: 20px;
 }
 
 /* Hero Section */
@@ -127,6 +136,7 @@ label {
   margin: 12px 0 6px 0;
   color: #2d3748;
 }
+
 textarea, input[type="text"] {
   width: 100%;
   box-sizing: border-box;
@@ -135,6 +145,12 @@ textarea, input[type="text"] {
   border-radius: 6px;
   background: #f7fafc;
   font-size: 0.9rem;
+}
+
+textarea:focus, input[type="text"]:focus {
+  outline: none;
+  border-color: #3182ce;
+  background: #ffffff;
 }
 
 /* Buttons */
@@ -151,6 +167,11 @@ textarea, input[type="text"] {
   font-size: 0.85rem;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn-primary, .btn-vote {
@@ -159,7 +180,7 @@ textarea, input[type="text"] {
 }
 
 .btn-secondary {
-  background: #2b6cb0;
+  background: #4a5568;
   color: #ffffff;
 }
 
@@ -188,6 +209,14 @@ textarea, input[type="text"] {
   border-radius: 4px;
 }
 
+.arg-left {
+  border-left: 4px solid #2b6cb0;
+}
+
+.arg-right {
+  border-left: 4px solid #38a169;
+}
+
 .arg-card p {
   font-size: 0.85rem;
   color: #4a5568;
@@ -195,13 +224,34 @@ textarea, input[type="text"] {
   margin: 0;
 }
 
-.arg-left { border-left: 4px solid #2b6cb0; }
-.arg-right { border-left: 4px solid #38a169; }
-
-.arg-title-blue { color: #2b6cb0; font-size: 0.85rem; margin: 0 0 6px 0; }
-.arg-title-green { color: #2f855a; font-size: 0.85rem; margin: 0 0 6px 0; }
-
-@media (max-width: 600px) {
-  .debate-grid { grid-template-columns: 1fr; }
-  .vote-group { flex-direction: column; }
+.arg-title-blue {
+  color: #2b6cb0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
 }
+
+.arg-title-green {
+  color: #2f855a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .debate-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .vote-group {
+    flex-direction: column;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
