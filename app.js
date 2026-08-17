@@ -57,7 +57,23 @@ function openModal(id) {
 if (typeof caseStudies !== 'undefined') {
   caseStudies.push(...additionalCaseStudies);
 }
+// Function for Searching Cases
+function searchCases() {
+  console.log("Search executed");
+  const query = document.getElementById('search-input')?.value.toLowerCase();
+}
 
+// Function for Resetting Filters
+function resetFilters() {
+  console.log("Filters reset");
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = '';
+}
+
+// Function for Analyzing Cases
+function analyzeCase() {
+  console.log("Analyzing case...");
+}
 // Initialize Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -87,5 +103,4 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof resetFilters === 'function') resetFilters();
     });
   }
-
 });
