@@ -657,7 +657,13 @@ function openCaseModal(caseId) {
   document.getElementById("case-modal").style.display = "flex";
 }
 caseStudies.push(...additionalCaseStudies);
+      
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Analyze Case Button
+ const analyzeBtn = document.getElementById('analyze-btn');
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener('click', (e) => {
+});
 
   // 1. Analyze Case Button
   const analyzeBtn = document.getElementById('analyze-btn');
