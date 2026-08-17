@@ -5,22 +5,42 @@ const caseStudies = [
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
-    category: "Robotics & AI",
-    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures without direct real-time human supervision.",
-    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation. The operator did not override the system, leading to temporary nerve involvement.",
-    dilemma: "Balancing technological efficiency and precision of autonomous systems against the imperative for clear human accountability and informed consent.",
+    category: "robotics",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures.",
+    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation.",
+    dilemma: "Balancing technological efficiency with human accountability.",
     stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"],
     sources: ["FDA Medical Device Guidance 2024", "Journal of Dental Ethics Vol. 12"]
   },
   {
     id: "pediatric-transfusion",
     title: "Pediatric Blood Transfusion Refusal",
-    category: "Pediatrics",
-    summary: "Evaluating parental proxy rights versus pediatric assent when managing life-threatening emergencies.",
-    background: "A 14-year-old patient requires a blood transfusion during surgery, but parents refuse based on religious grounds.",
+    category: "pediatrics",
+    summary: "Evaluating parental proxy rights versus pediatric assent.",
+    background: "A 14-year-old patient requires a blood transfusion but parents refuse based on religious grounds.",
     dilemma: "Determining state intervention boundaries when parental beliefs conflict with life-saving care.",
     stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"],
     sources: ["American Academy of Pediatrics Ethics 2023"]
+  },
+  {
+    id: "data-sovereignty",
+    title: "AI Diagnostics & Patient Data Sovereignty",
+    category: "data-privacy",
+    summary: "Analyzing HIPAA compliance and consent requirements when training diagnostic ML models.",
+    background: "A hospital uses patient scans to train an AI model without explicit consent.",
+    dilemma: "Balancing innovation with patient data ownership.",
+    stakeholders: ["Patient", "Hospital IT", "AI Vendor", "Regulators"],
+    sources: ["HIPAA Privacy Rule 2024", "Journal of Medical Informatics"]
+  },
+  {
+    id: "scarce-robotics",
+    title: "Allocation of Scarce Robotic Surgical Facilities",
+    category: "robotics",
+    summary: "Balancing utilitarian outcomes against egalitarian access.",
+    background: "A hospital has one robotic surgical unit and must prioritize cases.",
+    dilemma: "Should priority be based on urgency, fairness, or projected outcomes?",
+    stakeholders: ["Patients", "Hospital Admin", "Surgeons"],
+    sources: ["Ethics of Resource Allocation 2023"]
   }
 ];
 
@@ -28,91 +48,97 @@ const caseStudies = [
 // OPEN MODAL
 // -----------------------------
 function openCaseModal(id) {
-  openModal(id);
-}
-
-function openModal(id) {
   const item = caseStudies.find(c => c.id === id);
   if (!item) return;
 
   const content = document.getElementById("modal-body");
-  if (content) {
-    content.innerHTML = `
-      <h3>${item.title}</h3>
-      <p><strong>Category:</strong> ${item.category}</p>
-      <p>${item.summary}</p>
-      <hr>
-      <h4>Background</h4>
-      <p>${item.background}</p>
-      <h4>Ethical Dilemma</h4>
-      <p>${item.dilemma}</p>
-      <h4>Key Stakeholders</h4>
-      <ul>${item.stakeholders.map(s => `<li>${s}</li>`).join("")}</ul>
-      <h4>Academic Sources & Further Reading</h4>
-      <ul>${item.sources.map(s => `<li>${s}</li>`).join("")}</ul>
-    `;
-    document.getElementById("case-modal").style.display = "flex";
+  content.innerHTML = `
+    <h3>${item.title}</h3>
+    <p><strong>Category:</strong> ${item.category}</p>
+    <p>${item.summary}</p>
+    <hr>
+    <h4>Background</h4>
+    <p>${item.background}</p>
+    <h4>Ethical Dilemma</h4>
+    <p>${item.dilemma}</p>
+    <h4>Key Stakeholders</h4>
+    <ul>${item.stakeholders.map(s => `<li>${s}</li>`).join("")}</ul>
+    <h4>Sources</h4>
+    <ul>${item.sources.map(s => `<li>${s}</li>`).join("")}</ul>
+  `;
+  document.getElementById("case-modal").style.display = "flex";
+}
+
+// -----------------------------
+// CUSTOM CASE ANALYZER
+// -----------------------------
+function analyzeCustomCase() {
+  const input = document.getElementById("custom-case-input").value.trim();
+  const output = document.getElementById("feedback-output");
+
+  if (!input) {
+    output.innerHTML = "<p>Please enter a case summary.</p>";
+    return;
   }
+
+  output.innerHTML = `
+    <h3>Preliminary Ethical Analysis</h3>
+    <p><strong>Your Case:</strong> ${input}</p>
+    <p>This case likely involves autonomy, beneficence, non-maleficence, and justice.</p>
+  `;
+}
+
+function clearCustomCase() {
+  document.getElementById("custom-case-input").value = "";
+  document.getElementById("feedback-output").innerHTML = "";
 }
 
 // -----------------------------
-// SEARCH CASES
+// SEARCH & FILTERS
 // -----------------------------
-function searchCases() {
-  console.log("Search executed");
-  const query = document.getElementById('search-input')?.value.toLowerCase();
-  // You can add filtering logic here later
+function filterCases() {
+  const query = document.getElementById("search-input").value.toLowerCase();
+  const cards = document.querySelectorAll(".case-card");
+
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    card.style.display = title.includes(query) ? "block" : "none";
+  });
 }
 
-// -----------------------------
-// RESET FILTERS
-// -----------------------------
-function resetFilters() {
-  console.log("Filters reset");
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = '';
+function clearSearchInput() {
+  document.getElementById("search-input").value = "";
+  filterCases();
 }
 
-// -----------------------------
-// ANALYZE CASE
-// -----------------------------
-function analyzeCase() {
-  console.log("Analyzing case...");
-  // Add your analysis logic later
+function filterCategory(category, btn) {
+  const cards = document.querySelectorAll(".case-card");
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  buttons.forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+
+  cards.forEach(card => {
+    if (category === "all") {
+      card.style.display = "block";
+    } else {
+      card.style.display = card.dataset.category === category ? "block" : "none";
+    }
+  });
+}
+
+function resetAllFilters() {
+  document.getElementById("search-input").value = "";
+  filterCategory("all", document.querySelector(".filter-btn"));
 }
 
 // -----------------------------
 // EVENT LISTENERS
 // -----------------------------
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Analyze Case Button
-  const analyzeBtn = document.getElementById('analyze-btn');
-  if (analyzeBtn) {
-    analyzeBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      analyzeCase();
-    });
-  }
-
-  // Search Cases Button
-  const searchBtn = document.getElementById('search-btn');
-  if (searchBtn) {
-    searchBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      searchCases();
-    });
-  }
-
-  // Reset Filters Button
-  const resetFiltersBtn = document.getElementById('reset-filters');
-  if (resetFiltersBtn) {
-    resetFiltersBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      resetFilters();
-    });
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("App loaded successfully");
 });
+
 
   
 
