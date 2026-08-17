@@ -141,46 +141,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   
-// -----------------------------
-// COMMUNITY VOTE SYSTEM
-// -----------------------------
-let votes = { up: 0, down: 0 };
+You are an educational bioethics and medical law reasoning tool for BioEthix & MedLaw.
+When provided with a scenario, analyze it concisely using this exact 7-part output structure:
 
-function vote(type) {
-  const result = document.getElementById("vote-result");
+1. Core Ethical Dilemma
+State the central conflict in 1-2 clear sentences.
 
-  if (type === "up") votes.up++;
-  if (type === "down") votes.down++;
+2. Key Stakeholders
+List key parties (Patient, Provider, Developer, Institution) and their core interest in bullet points.
 
-  const total = votes.up + votes.down;
+3. Four-Principle Bioethical Framework
+Briefly evaluate:
+- Autonomy:
+- Beneficence:
+- Non-Maleficence:
+- Justice:
 
-  if (total === 0) {
-    result.innerHTML = "<p>No votes yet.</p>";
-    return;
-  }
+4. Legal & Regulatory Considerations
+Highlight key legal questions or liability concepts in 1-2 sentences.
 
-  const upPercent = Math.round((votes.up / total) * 100);
-  const downPercent = Math.round((votes.down / total) * 100);
+5. Balanced Perspectives
+- Argument A:
+- Argument B:
 
-  result.innerHTML = `
-    <p>👍 ${upPercent}% agree &nbsp; | &nbsp; 👎 ${downPercent}% disagree</p>
-    <p class="small-note">Based on ${total} community votes.</p>
-  `;
-}
+6. Discussion Questions
+Provide 2 concise debate questions for students.
 
-// -----------------------------
-// FEEDBACK SYSTEM
-// -----------------------------
-function submitFeedback() {
-  const text = document.getElementById("feedback-text").value.trim();
-  const msg = document.getElementById("feedback-message");
+7. Neutral Synthesis
+Provide a 1-2 sentence neutral conclusion.
 
-  if (!text) {
-    msg.innerHTML = "<p>Please write feedback before submitting.</p>";
-    return;
-  }
-
-  msg.innerHTML = "<p>Thank you for your feedback! Your response has been recorded.</p>";
-  document.getElementById("feedback-text").value = "";
-}
-
+Keep all sections brief, objective, and clear. Do not use emojis. 
