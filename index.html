@@ -1,120 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="title" content="BioEthix & MedLaw Assistant | Medical Law Dilemma Analyzer">
-  <meta name="description" content="An open-source AI tool to analyze medical law and bioethics scenarios.">
-  <meta name="keywords" content="Medical Law Dilemma Analyzer, Bioethics, MedLaw">
-  <meta name="robots" content="index, follow">
+// -----------------------------
+// CASE STUDIES DATA
+// -----------------------------
+const caseStudies = [
+  {
+    id: "surgical-robotics",
+    title: "Autonomous Surgical Robotics in Dental Practice",
+    category: "Robotics",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures.",
+    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation.",
+    dilemma: "Balancing technological efficiency with human accountability.",
+    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"],
+    sources: ["FDA Medical Device Guidance 2024", "Journal of Dental Ethics Vol. 12"]
+  },
+  {
+    id: "pediatric-transfusion",
+    title: "Pediatric Blood Transfusion Refusal",
+    category: "Pediatrics",
+    summary: "Evaluating parental proxy rights versus pediatric assent.",
+    background: "A 14-year-old patient requires a blood transfusion but parents refuse based on religious grounds.",
+    dilemma: "Determining state intervention boundaries when parental beliefs conflict with life-saving care.",
+    stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"],
+    sources: ["American Academy of Pediatrics Ethics 2023"]
+  },
+  {
+    id: "data-sovereignty",
+    title: "AI Diagnostics & Patient Data Sovereignty",
+    category: "Data Privacy",
+    summary: "Analyzing HIPAA compliance and consent requirements when training diagnostic ML models.",
+    background: "A hospital uses patient scans to train an AI model without explicit consent.",
+    dilemma: "Balancing innovation with patient data ownership.",
+    stakeholders: ["Patient", "Hospital IT", "AI Vendor", "Regulators"],
+    sources: ["HIPAA Privacy Rule 2024", "Journal of Medical Informatics"]
+  },
+  {
+    id: "scarce-robotics",
+    title: "Allocation of Scarce Robotic Surgical Facilities",
+    category: "Robotics",
+    summary: "Balancing utilitarian outcomes against egalitarian access.",
+    background: "A hospital has one robotic surgical unit and must prioritize cases.",
+    dilemma: "Should priority be based on urgency, fairness, or projected outcomes?",
+    stakeholders: ["Patients", "Hospital Admin", "Surgeons"],
+    sources: ["Ethics of Resource Allocation 2023"]
+  }
+];
 
-  <title>BioEthix & MedLaw Assistant</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+// -----------------------------
+// OPEN MODAL
+// -----------------------------
+function openCaseModal(id) {
+  const item = caseStudies.find(c => c.id === id);
+  if (!item) return;
 
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="logo">BioEthix & MedLaw</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-    </div>
-  </nav>
-
-  <!-- Main Container -->
-  <main class="container">
-
-    <!-- Custom Case Analyzer -->
-    <section class="analyzer-section">
-      <h1>Analyze a Custom Case</h1>
-
-      <label for="custom-case-input"><strong>Case Summary & Key Dilemma:</strong></label>
-      <textarea id="custom-case-input" rows="5" placeholder="Describe the medical law or ethics conflict here..."></textarea>
-
-      <div class="button-group">
-        <button type="button" id="analyze-btn" class="primary-btn" onclick="analyzeCustomCase()">Analyze Case</button>
-        <button type="button" id="clear-custom-btn" class="secondary-btn" onclick="clearCustomCase()">Clear</button>
-      </div>
-
-      <div id="feedback-output" style="margin-top: 1.5rem;"></div>
-    </section>
-
+  const content = document.getElementById("modal-body");
+  content.innerHTML = `
+    <h3>${item.title}</h3>
+    <p><strong>Category:</strong> ${item.category}</p>
+    <p>${item.summary}</p>
     <hr>
+    <h4>Background</h4>
+    <p>${item.background}</p>
+    <h4>Ethical Dilemma</h4>
+    <p>${item.dilemma}</p>
+    <h4>Key Stakeholders</h4>
+    <ul>${item.stakeholders.map(s => `<li>${s}</li>`).join("")}</ul>
+    <h4>Sources</h4>
+    <ul>${item.sources.map(s => `<li>${s}</li>`).join("")}</ul>
+  `;
+  document.getElementById("case-modal").style.display = "flex";
+}
 
-    <!-- Search Section -->
-    <section class="search-section" style="margin-top: 2rem;">
-      <h2>Search Case Studies</h2>
+// -----------------------------
+// CUSTOM CASE ANALYZER
+// -----------------------------
+function analyzeCustomCase() {
+  const input = document.getElementById("custom-case-input").value.trim();
+  const output = document.getElementById("feedback-output");
 
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search..." oninput="filterCases()">
-        <button type="button" id="clear-search-btn" class="secondary-btn" onclick="clearSearchInput()">Clear</button>
-      </div>
+  if (!input) {
+    output.innerHTML = "<p>Please enter a case summary.</p>";
+    return;
+  }
 
-      <div class="toolbar-row">
-        <div id="case-count" class="case-count">Showing 4 cases</div>
-        <button type="button" id="reset-filters-btn" class="secondary-btn" onclick="resetAllFilters()">Reset Filters</button>
-      </div>
+  output.innerHTML = `
+    <h3>Preliminary Ethical Analysis</h3>
+    <p><strong>Your Case:</strong> ${input}</p>
+    <p>This case likely involves autonomy, beneficence, non-maleficence, and justice.</p>
+  `;
+}
 
-      <!-- Category Filters -->
-      <div class="filter-pills" aria-label="Case categories">
-        <button type="button" class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('robotics', this)">Robotics</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('pediatrics', this)">Pediatrics</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('data-privacy', this)">Data Privacy</button>
-      </div>
+function clearCustomCase() {
+  document.getElementById("custom-case-input").value = "";
+  document.getElementById("feedback-output").innerHTML = "";
+}
 
-      <!-- Case Grid -->
-      <div class="case-grid" id="case-grid">
+// -----------------------------
+// SEARCH & FILTERS
+// -----------------------------
+function filterCases() {
+  const query = document.getElementById("search-input").value.toLowerCase();
+  const cards = document.querySelectorAll(".case-card");
 
-        <!-- Card 1 -->
-        <div class="card case-card" data-category="robotics" data-title="autonomous surgical robotics in dental practice">
-          <h3>Autonomous Surgical Robotics in Dental Practice</h3>
-          <div class="tag-badge">Robotics</div>
-          <p>Evaluating liability and patient consent when robotics systems perform invasive procedures.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('surgical-robotics')">Read more</button>
-        </div>
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    card.style.display = title.includes(query) ? "block" : "none";
+  });
+}
 
-        <!-- Card 2 -->
-        <div class="card case-card" data-category="pediatrics" data-title="pediatric blood transfusion refusal">
-          <h3>Pediatric Blood Transfusion Refusal</h3>
-          <div class="tag-badge">Pediatrics</div>
-          <p>Evaluating parental proxy rights versus pediatric assent when lifesaving care is declined.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('pediatric-transfusion')">Read more</button>
-        </div>
+function clearSearchInput() {
+  document.getElementById("search-input").value = "";
+  filterCases();
+}
 
-        <!-- Card 3 -->
-        <div class="card case-card" data-category="data-privacy" data-title="ai diagnostics and patient data sovereignty">
-          <h3>AI Diagnostics & Patient Data Sovereignty</h3>
-          <div class="tag-badge">Data Privacy</div>
-          <p>Analyzing HIPAA compliance and consent requirements when training diagnostic ML models.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('data-sovereignty')">Read more</button>
-        </div>
+function filterCategory(category, btn) {
+  const cards = document.querySelectorAll(".case-card");
+  const buttons = document.querySelectorAll(".filter-btn");
 
-        <!-- Card 4 -->
-        <div class="card case-card" data-category="robotics" data-title="allocation of scarce robotic surgical facilities">
-          <h3>Allocation of Scarce Robotic Surgical Facilities</h3>
-          <div class="tag-badge">Robotics</div>
-          <p>Balancing utilitarian outcomes against egalitarian access in high-tech surgical scheduling.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('scarce-robotics')">Read more</button>
-        </div>
+  buttons.forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
 
-      </div>
-    </section>
+  cards.forEach(card => {
+    if (category === "all") {
+      card.style.display = "block";
+    } else {
+      card.style.display = card.dataset.category === category ? "block" : "none";
+    }
+  });
+}
 
-  </main>
+function resetAllFilters() {
+  document.getElementById("search-input").value = "";
+  filterCategory("all", document.querySelector(".filter-btn"));
+}
 
-  <!-- Modal -->
-  <div id="case-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="document.getElementById('case-modal').style.display='none'">&times;</span>
-      <div id="modal-body"></div>
-    </div>
-  </div>
+// -----------------------------
+// EVENT LISTENERS
+// -----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("App loaded successfully");
+});
 
-  <!-- External JS -->
-  <script src="app.js"></script>
+      
 
-</body>
-</html>
