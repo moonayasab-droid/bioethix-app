@@ -1,15 +1,30 @@
-// Alias so HTML onclick="openCaseModal(...)" works properly
+// Alias for onclick triggers
 function openCaseModal(id) {
   openModal(id);
 }
-// Function to submit feedback
-function submitFeedback(event) {
-  event.preventDefault();
-  document.getElementById("feedback-status").style.display = "block";
-  document.getElementById("feedback-form").reset();
-}
 
 const additionalCaseStudies = [
+  {
+    id: "surgical-robotics",
+    title: "Autonomous Surgical Robotics in Dental Practice",
+    category: "Robotics & AI",
+    summary: "Evaluating liability and patient consent when robotic systems perform invasive procedures without direct real-time human supervision.",
+    background: "During a routine implant procedure, an autonomous robotic guidance unit encountered an unexpected anatomical variation. The operator did not override the system, leading to temporary nerve involvement.",
+    dilemma: "Balancing technological efficiency and precision of autonomous systems against the imperative for clear human accountability and informed consent.",
+    stakeholders: ["Patient", "Dental Surgeon", "Robotic Software Developer", "Regulatory Authorities"]
+  },
+  {
+    id: "pediatric-transfusion",
+    title: "Pediatric Blood Transfusion Refusal",
+    category: "Pediatrics",
+    summary: "Evaluating parental proxy rights versus pediatric assent when managing life-threatening emergencies.",
+    background: "A 14-year-old patient requires a blood transfusion during surgery, but parents refuse based on religious grounds.",
+    dilemma: "Determining state intervention boundaries when parental beliefs conflict with life-saving care.",
+    stakeholders: ["Patient", "Parents", "Surgical Team", "Hospital Legal Counsel"]
+  }
+];
+
+const caseStudies = additionalCaseStudies;
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
