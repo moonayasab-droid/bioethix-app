@@ -1,3 +1,7 @@
+// Alias so HTML onclick="openCaseModal(...)" works properly
+function openCaseModal(id) {
+  openModal(id);
+}
 // Function to submit feedback
 function submitFeedback(event) {
   event.preventDefault();
