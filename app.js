@@ -556,7 +556,7 @@ function submitFeedback(event) {
   document.getElementById("feedback-form").reset();
 }
 
-const additionalCaseStudies = [
+caseStudies.push( 
   {
     id: "surgical-robotics",
     title: "Autonomous Surgical Robotics in Dental Practice",
@@ -656,7 +656,7 @@ function openCaseModal(caseId) {
 
   document.getElementById("case-modal").style.display = "flex";
 }
-
+caseStudies.push(...additionalCaseStudies);
 document.addEventListener('DOMContentLoaded', () => {
 
   // 1. Analyze Case Button
