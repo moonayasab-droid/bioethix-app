@@ -204,4 +204,4 @@ textarea, input[type="text"] {
 @media (max-width: 600px) {
   .debate-grid { grid-template-columns: 1fr; }
   .vote-group { flex-direction: column; }
-} 
+}
