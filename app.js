@@ -656,3 +656,45 @@ function openCaseModal(caseId) {
 
   document.getElementById("case-modal").style.display = "flex";
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Analyze Case Button
+  const analyzeBtn = document.getElementById('analyze-btn');
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log("Analyze clicked!");
+      analyzeCase(); // Runs your AI analysis function
+    });
+  }
+
+  // 2. Clear / Reset Scenario Button
+  const clearBtn = document.getElementById('clear-case-btn');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const inputArea = document.getElementById('scenario-details');
+      if (inputArea) inputArea.value = '';
+    });
+  }
+
+  // 3. Search / Filter Buttons
+  const searchBtn = document.getElementById('search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log("Search clicked!");
+      searchCases(); // Runs your case search function
+    });
+  }
+
+  const resetFiltersBtn = document.getElementById('reset-filters-btn');
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      resetFilters(); // Runs your reset function
+    });
+  }
+
+});
