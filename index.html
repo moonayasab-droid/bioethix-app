@@ -135,9 +135,8 @@
         <section class="search-section" style="margin-top: 2rem;">
             <h2>Search Case Studies</h2>
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="Search case studies (e.g., AI, Consent, Robotics)...">
-                <button type="button" id="search-btn">Search</button>
-                <button type="button" id="clear-search-btn" class="secondary-btn">Clear</button>
+                <input type="text" id="search-input" placeholder="Search...">
+                <button type="button" id="clear-search-btn" class="secondary-btn" onclick="clearSearchInput()"Clear</button>
             </div>
 
             <div class="toolbar-row">
@@ -244,16 +243,26 @@
 </div>
 <script src="app.js"></script>
 <script>
-  // Fix search clear button
-  const clearBtn = document.querySelector('button[onclick*="clear"]') || document.getElementById('clearSearch');
-  const searchInput = document.querySelector('input[type="text"]');
-
-  if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      if (typeof renderCases === 'function') renderCases(caseStudies);
-    });
+  // Global clear search handler
+  function clearSearchInput() {
+    const inputs = document.querySelectorAll('input[type="text"], input[type="search"]');
+    inputs.forEach(input => input.value = '');
+    
+    // Trigger input event to clear search filters
+    inputs.forEach(input => input.dispatchEvent(new Event('input', { bubbles: true })));
+    
+    if (typeof renderCases === 'function' && typeof caseStudies !== 'undefined') {
+      renderCases(caseStudies);
+    }
   }
+
+  // Attach event listeners after DOM loads
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(btn => {
+      if (btn.textContent.trim().toLowerCase() === 'clear') {
+        btn.addEventListener('click', clearSearchInput);
+      }
+    });
+  });
 </script>
-</body>
-  
