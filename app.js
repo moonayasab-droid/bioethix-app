@@ -144,4 +144,4 @@ Provide 2 concise debate questions for students.
 7. Neutral Synthesis
 Provide a 1-2 sentence neutral conclusion.
 
-Keep all sections brief, objective, and clear. Do not use emojis.
+Keep all sections brief, objective, and clear. Do not use emojis. 
