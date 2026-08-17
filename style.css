@@ -427,3 +427,78 @@ nav a, .nav-links a {
   background-color: #0056b3;
   transition: width 0.5s ease-in-out;
 }
+
+/* Filter Pill Controls */
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+/* 2-Column Responsive Card Grid */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.case-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.case-card h3 {
+  color: #1e3a8a;
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.badge-pill {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.debate-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.argument-card {
+  padding: 16px;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.card-left { border-left: 4px solid #1d4ed8; }
+.card-right { border-left: 4px solid #15803d; }

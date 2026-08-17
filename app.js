@@ -115,46 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
   
-// -----------------------------
-// COMMUNITY VOTE SYSTEM
-// -----------------------------
-let votes = { up: 0, down: 0 };
+async function analyzeCase(userInput) {
+  const systemInstruction = `You are an educational bioethics and medical law reasoning tool for BioEthix & MedLaw.
+When provided with a scenario, analyze it using this exact 7-part output structure...`;
 
-function vote(type) {
-  const result = document.getElementById("vote-result");
-
-  if (type === "up") votes.up++;
-  if (type === "down") votes.down++;
-
-  const total = votes.up + votes.down;
-
-  if (total === 0) {
-    result.innerHTML = "<p>No votes yet.</p>";
-    return;
-  }
-
-  const upPercent = Math.round((votes.up / total) * 100);
-  const downPercent = Math.round((votes.down / total) * 100);
-
-  result.innerHTML = `
-    <p>👍 ${upPercent}% agree &nbsp; | &nbsp; 👎 ${downPercent}% disagree</p>
-    <p class="small-note">Based on ${total} community votes.</p>
-  `;
+  // Pass systemInstruction in your fetch API request body here
 }
-
-// -----------------------------
-// FEEDBACK SYSTEM
-// -----------------------------
-function submitFeedback() {
-  const text = document.getElementById("feedback-text").value.trim();
-  const msg = document.getElementById("feedback-message");
-
-  if (!text) {
-    msg.innerHTML = "<p>Please write feedback before submitting.</p>";
-    return;
-  }
-
-  msg.innerHTML = "<p>Thank you for your feedback! Your response has been recorded.</p>";
-  document.getElementById("feedback-text").value = "";
-}
-
