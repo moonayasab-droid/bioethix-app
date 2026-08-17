@@ -243,4 +243,17 @@
   <button class="btn-link" onclick="openCaseModal('pediatric-transfusion')">Read more</button>
 </div>
 <script src="app.js"></script>
+<script>
+  // Fix search clear button
+  const clearBtn = document.querySelector('button[onclick*="clear"]') || document.getElementById('clearSearch');
+  const searchInput = document.querySelector('input[type="text"]');
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (typeof renderCases === 'function') renderCases(caseStudies);
+    });
+  }
+</script>
 </body>
+  
