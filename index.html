@@ -3,188 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="title" content="BioEthix & MedLaw Assistant | Medical Law Dilemma Analyzer">
-  <meta name="description" content="An open-source AI tool to analyze medical law and bioethics scenarios.">
-  <meta name="keywords" content="Medical Law, Bioethics, MedLaw, Case Analyzer">
-  <meta name="robots" content="index, follow">
-
-  <title>BioEthix & MedLaw Assistant</title>
+  <title>BioEthix & MedLaw</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<footer class="disclaimer">
-  <h3>⚖️ Educational Disclaimer</h3>
-  <p>
-    BioEthix & MedLaw is an educational project designed to encourage learning, discussion, and critical thinking about bioethics, medicine, technology, and law.
-    The information provided on this website is for educational purposes only. It is not medical advice, legal advice, diagnosis, treatment, or a substitute for advice from a qualified professional.
-  </p>
-  <p>
-    Laws, regulations, medical practices, and ethical standards can vary by country and may change over time.  
-    Case studies and AI-generated analyses may simplify complex issues and should not be treated as authoritative professional conclusions.
-  </p>
-  <p>
-    Always consult an appropriately qualified professional for real medical or legal matters.
-  </p>
-</footer>
-
-<footer class="ai-notice">
-  <h3>🤖 AI Notice</h3>
-  <p>
-    Some analyses on this website may be generated with the assistance of AI tools.  
-    AI-generated content can help explore ethical perspectives, but it may simplify complex issues or miss important context.
-  </p>
-  <p>
-    Always verify information with reliable academic, medical, or legal sources.
-  </p>
-</footer>
-
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="logo">BioEthix & MedLaw</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
+  <!-- Top Navigation Bar -->
+  <header class="navbar-wrapper">
+    <div class="disclaimer-banner">
+      Disclaimer: This project is strictly for educational and research purposes. It does not constitute formal medical, legal, or professional advice.
     </div>
-  </nav>
-
-  <!-- Main Container -->
-  <main class="container">
-
-    <!-- Custom Case Analyzer -->
-    <section class="analyzer-section">
-      <h1>Analyze a Custom Case</h1>
-
-      <label for="custom-case-input"><strong>Case Summary & Key Dilemma:</strong></label>
-      <textarea id="custom-case-input" rows="5" placeholder="Describe the medical law or ethics conflict here..."></textarea>
-
-      <div class="button-group">
-        <button type="button" id="analyze-btn" class="primary-btn" onclick="analyzeCustomCase()">Analyze Case</button>
-        <button type="button" id="clear-custom-btn" class="secondary-btn" onclick="clearCustomCase()">Clear</button>
+    <nav class="navbar">
+      <div class="nav-left">
+        <span class="site-title">BioEthix & MedLaw</span>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="#analyzer">Analyzer</a>
+        </div>
       </div>
+      <div class="nav-right">
+        <button class="theme-btn">Toggle Theme</button>
+        <button class="theme-btn">High Contrast</button>
+      </div>
+    </nav>
+  </header>
 
-      <div id="feedback-output" class="analysis-output"></div>
+  <main class="main-content">
+
+    <!-- Section 1: Hero & Analyzer -->
+    <section id="analyzer" class="section-card">
+      <h1 class="hero-title">BioEthix & MedLaw Assistant</h1>
+      <p class="hero-subtitle">Exploring ethics, law, and technology in modern healthcare.</p>
+
+      <div class="form-group">
+        <h2>Analyze a Custom Case</h2>
+        <label for="case-input">Case Summary & Key Dilemma:</label>
+        <textarea id="case-input" placeholder="Describe the medical law or ethics conflict here..."></textarea>
+        <div class="button-group">
+          <button class="btn btn-primary">Analyze Case</button>
+          <button class="btn btn-secondary">Clear</button>
+        </div>
+      </div>
     </section>
 
-    <hr>
+    <!-- Section 2: Ethics of the Month -->
+    <section class="section-card">
+      <h2 class="section-title">Ethics of the Month: August 2026</h2>
+      <p class="question-text">Should a clinician be held legally liable when an autonomous AI triage algorithm yields a misdiagnosis?</p>
+      <p class="instruction-text">Cast your vote to see real-time community consensus, then examine the core arguments below.</p>
 
-    <!-- Search Section -->
-    <section class="search-section">
-      <h2>Search Case Studies</h2>
-
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search..." oninput="filterCases()">
-        <button type="button" id="clear-search-btn" class="secondary-btn" onclick="clearSearchInput()">Clear</button>
+      <div class="vote-group">
+        <button class="btn btn-vote">Clinician Responsible</button>
+        <button class="btn btn-vote">AI Developer Responsible</button>
+        <button class="btn btn-vote">Shared Responsibility</button>
       </div>
 
-      <div class="toolbar-row">
-        <div id="case-count" class="case-count">Showing 4 cases</div>
-        <button type="button" id="reset-filters-btn" class="secondary-btn" onclick="resetAllFilters()">Reset Filters</button>
+      <hr class="divider">
+
+      <h3 class="subsection-title">Debate Breakdown: Key Perspectives</h3>
+      <div class="debate-grid">
+        <div class="arg-card arg-left">
+          <h4 class="arg-title-blue">ARGUMENT A: Clinician Liability</h4>
+          <p>The clinician retains ultimate duty of care. Delegating final diagnostic execution to an unverified software algorithm without independent verification breaches standard clinical duty.</p>
+        </div>
+        <div class="arg-card arg-right">
+          <h4 class="arg-title-green">ARGUMENT B: Developer / Product Liability</h4>
+          <p>If an autonomous system operates as a 'black box' whose inner operations are unexplainable, liability shifts toward strict product liability for software failure rather than human negligence.</p>
+        </div>
       </div>
+    </section>
 
-      <!-- Category Filters -->
-      <div class="filter-pills">
-        <button type="button" class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('robotics', this)">Robotics</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('pediatrics', this)">Pediatrics</button>
-        <button type="button" class="filter-btn" onclick="filterCategory('data-privacy', this)">Data Privacy</button>
-      </div>
+    <!-- Section 3: Feedback Form -->
+    <section class="section-card">
+      <h2 class="section-title">Help Improve BioEthix & MedLaw</h2>
+      <p class="instruction-text">We are actively refining our educational tools. Please share your thoughts below!</p>
 
-      <!-- Case Grid -->
-      <div class="case-grid" id="case-grid">
-
-        <!-- Card 1 -->
-        <div class="card case-card" data-category="robotics" data-title="autonomous surgical robotics in dental practice">
-          <h3>Autonomous Surgical Robotics in Dental Practice</h3>
-          <div class="tag-badge">Robotics</div>
-          <p>Evaluating liability and patient consent when robotic systems perform invasive procedures.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('surgical-robotics')">Read more</button>
+      <div class="feedback-form">
+        <div class="field">
+          <label>What was most useful about this tool?</label>
+          <textarea rows="2"></textarea>
         </div>
-
-        <!-- Card 2 -->
-        <div class="card case-card" data-category="pediatrics" data-title="pediatric blood transfusion refusal">
-          <h3>Pediatric Blood Transfusion Refusal</h3>
-          <div class="tag-badge">Pediatrics</div>
-          <p>Evaluating parental proxy rights versus pediatric assent when lifesaving care is declined.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('pediatric-transfusion')">Read more</button>
+        <div class="field">
+          <label>Was anything confusing or difficult to navigate?</label>
+          <textarea rows="2"></textarea>
         </div>
-
-        <!-- Card 3 -->
-        <div class="card case-card" data-category="data-privacy" data-title="ai diagnostics and patient data sovereignty">
-          <h3>AI Diagnostics & Patient Data Sovereignty</h3>
-          <div class="tag-badge">Data Privacy</div>
-          <p>Analyzing HIPAA compliance and consent requirements when training diagnostic ML models.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('data-sovereignty')">Read more</button>
+        <div class="field">
+          <label>What bioethics or medical law topic should we cover next?</label>
+          <input type="text">
         </div>
-
-        <!-- Card 4 -->
-        <div class="card case-card" data-category="robotics" data-title="allocation of scarce robotic surgical facilities">
-          <h3>Allocation of Scarce Robotic Surgical Facilities</h3>
-          <div class="tag-badge">Robotics</div>
-          <p>Balancing utilitarian outcomes against egalitarian access in high-tech surgical scheduling.</p>
-          <button type="button" class="btn-link" onclick="openCaseModal('scarce-robotics')">Read more</button>
-        </div>
-
+        <button class="btn btn-primary" style="margin-top: 12px;">Submit Anonymous Feedback</button>
       </div>
     </section>
 
   </main>
 
-  <!-- Modal -->
-  <div id="case-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="document.getElementById('case-modal').style.display='none'">&times;</span>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <!-- External JS -->
-  <script src="app.js"></script>
-
 </body>
 </html>
-
-<section class="community-vote">
-  <h2>Community Vote</h2>
-  <p class="vote-description">
-    Share your perspective on this month’s ethical dilemma.<br><br>
-    Your response is anonymous and helps us understand how students and visitors think about complex questions in medicine, technology, and law.
-  </p>
-
-  <div class="vote-buttons">
-    <button class="vote-btn" onclick="vote('up')">👍 I agree</button>
-    <button class="vote-btn" onclick="vote('down')">👎 I disagree</button>
-  </div>
-
-  <div id="vote-result" class="vote-result"></div>
-
-  <p class="vote-disclaimer">
-    <strong>Important:</strong> These results represent the opinions of participating visitors.  
-    They do not represent medical, legal, scientific, or professional consensus.
-  </p>
-</section>
-
-<section class="feedback-section">
-  <h2>Help Improve BioEthix & MedLaw</h2>
-
-  <p class="feedback-description">
-    BioEthix & MedLaw is a student-created educational project, and your feedback helps shape its development.<br><br>
-    Tell us:<br>
-    • What did you find most interesting?<br>
-    • Was anything confusing or difficult to use?<br>
-    • Which topic or case should we explore next?<br>
-    • What would make the website more useful for students?<br><br>
-    Please don’t submit personal, medical, or confidential information.
-  </p>
-
-  <textarea id="feedback-text" rows="4" placeholder="Write your feedback..."></textarea>
-
-  <button class="primary-btn" onclick="submitFeedback()">Submit Feedback</button>
-
-  <div id="feedback-message"></div>
-</section>
-
- 
-
-      
-
