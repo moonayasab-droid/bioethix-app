@@ -7,10 +7,10 @@ function initTheme() {
 
   if (savedTheme === "dark") {
     document.body.classList.add("dark-theme");
-    themeToggle.textContent = "☀️";
+    if (themeToggle) themeToggle.textContent = "☀️";
   } else {
     document.body.classList.remove("dark-theme");
-    themeToggle.textContent = "🌙";
+    if (themeToggle) themeToggle.textContent = "🌙";
   }
 }
 
@@ -20,11 +20,11 @@ function toggleTheme() {
   if (document.body.classList.contains("dark-theme")) {
     document.body.classList.remove("dark-theme");
     localStorage.setItem("theme", "light");
-    themeToggle.textContent = "🌙";
+    if (themeToggle) themeToggle.textContent = "🌙";
   } else {
     document.body.classList.add("dark-theme");
     localStorage.setItem("theme", "dark");
-    themeToggle.textContent = "☀️";
+    if (themeToggle) themeToggle.textContent = "☀️";
   }
 }
 
@@ -103,25 +103,25 @@ function openCaseModal(id) {
 // CUSTOM CASE ANALYZER
 // ========================================
 function analyzeCustomCase() {
-  const input = document.getElementById("custom-case-input").value.trim();
+  const input = document.getElementById("custom-case-input");
   const output = document.getElementById("feedback-output");
 
-  if (!input) {
-    output.innerHTML = "<p>Please enter a case summary.</p>";
+  if (!input || !input.value.trim()) {
+    output.innerHTML = "<p style='color: #dc2626;'>Please enter a case summary to analyze.</p>";
     return;
   }
 
   output.innerHTML = `
     <div class="analysis-dashboard">
       <h3>Preliminary Ethical Analysis</h3>
-      <p><strong>Your Case:</strong> ${input}</p>
+      <p><strong>Your Case:</strong> ${input.value}</p>
       <div class="dashboard-section">
         <h4>Ethical Principles Involved:</h4>
         <ul>
-          <li>Autonomy - Individual choice and self-determination</li>
-          <li>Beneficence - Acting in the best interest of patients</li>
-          <li>Non-maleficence - Avoiding harm</li>
-          <li>Justice - Fair distribution of resources and treatment</li>
+          <li><strong>Autonomy:</strong> Individual choice and self-determination</li>
+          <li><strong>Beneficence:</strong> Acting in the best interest of patients</li>
+          <li><strong>Non-maleficence:</strong> Avoiding harm</li>
+          <li><strong>Justice:</strong> Fair distribution of resources and treatment</li>
         </ul>
       </div>
       <p style="margin-top: 1rem; font-size: 0.9rem;"><em>Note: This is a preliminary analysis for educational purposes. Always consult qualified professionals for real cases.</em></p>
@@ -130,15 +130,18 @@ function analyzeCustomCase() {
 }
 
 function clearCustomCase() {
-  document.getElementById("custom-case-input").value = "";
-  document.getElementById("feedback-output").innerHTML = "";
+  const input = document.getElementById("custom-case-input");
+  const output = document.getElementById("feedback-output");
+  if (input) input.value = "";
+  if (output) output.innerHTML = "";
 }
 
 // ========================================
 // SEARCH & FILTERS
 // ========================================
 function filterCases() {
-  const query = document.getElementById("search-input").value.toLowerCase();
+  const searchInput = document.getElementById("search-input");
+  const query = searchInput ? searchInput.value.toLowerCase() : "";
   const cards = document.querySelectorAll(".case-card");
   let visibleCount = 0;
 
@@ -156,7 +159,8 @@ function filterCases() {
 }
 
 function clearSearchInput() {
-  document.getElementById("search-input").value = "";
+  const searchInput = document.getElementById("search-input");
+  if (searchInput) searchInput.value = "";
   filterCases();
 }
 
@@ -186,9 +190,11 @@ function filterCategory(category, btn) {
 }
 
 function resetAllFilters() {
-  document.getElementById("search-input").value = "";
+  const searchInput = document.getElementById("search-input");
+  if (searchInput) searchInput.value = "";
+  
   const allBtn = document.querySelector(".filter-btn");
-  filterCategory("all", allBtn);
+  if (allBtn) filterCategory("all", allBtn);
 }
 
 function updateCaseCount(count) {
@@ -205,6 +211,7 @@ let votes = { up: 0, down: 0 };
 
 function vote(type) {
   const result = document.getElementById("vote-result");
+  if (!result) return;
 
   if (type === "up") votes.up++;
   if (type === "down") votes.down++;
@@ -230,16 +237,20 @@ function vote(type) {
 // FEEDBACK SYSTEM
 // ========================================
 function submitFeedback() {
-  const text = document.getElementById("feedback-text").value.trim();
+  const feedbackInput = document.getElementById("feedback-text");
   const msg = document.getElementById("feedback-message");
 
+  if (!feedbackInput || !msg) return;
+
+  const text = feedbackInput.value.trim();
+
   if (!text) {
-    msg.innerHTML = "<p style='color: #dc2626;'>Please write feedback before submitting.</p>";
+    msg.innerHTML = "<p style='color: #dc2626; font-weight: 600;'>❌ Please write feedback before submitting.</p>";
     return;
   }
 
   msg.innerHTML = "<p style='color: #059669; font-weight: 600;'>✓ Thank you for your feedback! Your response has been recorded.</p>";
-  document.getElementById("feedback-text").value = "";
+  feedbackInput.value = "";
 
   // Clear message after 3 seconds
   setTimeout(() => {
@@ -251,6 +262,8 @@ function submitFeedback() {
 // EVENT LISTENERS & INITIALIZATION
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("BioEthix & MedLaw app initializing...");
+
   // Initialize theme from localStorage
   initTheme();
 
@@ -258,15 +271,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
     themeToggle.addEventListener("click", toggleTheme);
+    console.log("Theme toggle button attached");
+  } else {
+    console.warn("Theme toggle button not found");
   }
 
   // Close modal when clicking outside
-  window.addEventListener("click", (event) => {
-    const modal = document.getElementById("case-modal");
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
+  const modal = document.getElementById("case-modal");
+  if (modal) {
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
 
-  console.log("BioEthix & MedLaw app loaded successfully");
+  console.log("✓ BioEthix & MedLaw app loaded successfully!");
+  console.log("Available functions: analyzeCustomCase(), vote(), submitFeedback(), filterCases(), etc.");
 });
