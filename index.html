@@ -11,33 +11,35 @@
   <title>BioEthix & MedLaw Assistant</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<footer class="disclaimer">
-  <h3>⚖️ Educational Disclaimer</h3>
-  <p>
-    BioEthix & MedLaw is an educational project designed to encourage learning, discussion, and critical thinking about bioethics, medicine, technology, and law.
-    The information provided on this website is for educational purposes only. It is not medical advice, legal advice, diagnosis, treatment, or a substitute for advice from a qualified professional.
-  </p>
-  <p>
-    Laws, regulations, medical practices, and ethical standards can vary by country and may change over time.  
-    Case studies and AI-generated analyses may simplify complex issues and should not be treated as authoritative professional conclusions.
-  </p>
-  <p>
-    Always consult an appropriately qualified professional for real medical or legal matters.
-  </p>
-</footer>
-
-<footer class="ai-notice">
-  <h3>🤖 AI Notice</h3>
-  <p>
-    Some analyses on this website may be generated with the assistance of AI tools.  
-    AI-generated content can help explore ethical perspectives, but it may simplify complex issues or miss important context.
-  </p>
-  <p>
-    Always verify information with reliable academic, medical, or legal sources.
-  </p>
-</footer>
-
 <body>
+
+  <!-- Educational Disclaimer -->
+  <footer class="disclaimer">
+    <h3>⚖️ Educational Disclaimer</h3>
+    <p>
+      BioEthix & MedLaw is an educational project designed to encourage learning, discussion, and critical thinking about bioethics, medicine, technology, and law.
+      The information provided on this website is for educational purposes only. It is not medical advice, legal advice, diagnosis, treatment, or a substitute for advice from a qualified professional.
+    </p>
+    <p>
+      Laws, regulations, medical practices, and ethical standards can vary by country and may change over time.  
+      Case studies and AI-generated analyses may simplify complex issues and should not be treated as authoritative professional conclusions.
+    </p>
+    <p>
+      Always consult an appropriately qualified professional for real medical or legal matters.
+    </p>
+  </footer>
+
+  <!-- AI Notice -->
+  <footer class="ai-notice">
+    <h3>🤖 AI Notice</h3>
+    <p>
+      Some analyses on this website may be generated with the assistance of AI tools.  
+      AI-generated content can help explore ethical perspectives, but it may simplify complex issues or miss important context.
+    </p>
+    <p>
+      Always verify information with reliable academic, medical, or legal sources.
+    </p>
+  </footer>
 
   <!-- Navigation -->
   <nav class="navbar">
@@ -45,6 +47,7 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
+      <button id="themeToggle" class="theme-btn">🌙</button>
     </div>
   </nav>
 
@@ -128,6 +131,48 @@
       </div>
     </section>
 
+    <!-- Community Vote -->
+    <section class="community-vote">
+      <h2>Community Vote</h2>
+      <p class="vote-description">
+        Share your perspective on this month's ethical dilemma.<br><br>
+        Your response is anonymous and helps us understand how students and visitors think about complex questions in medicine, technology, and law.
+      </p>
+
+      <div class="vote-buttons">
+        <button class="vote-btn" onclick="vote('up')">👍 I agree</button>
+        <button class="vote-btn" onclick="vote('down')">👎 I disagree</button>
+      </div>
+
+      <div id="vote-result" class="vote-result"></div>
+
+      <p class="vote-disclaimer">
+        <strong>Important:</strong> These results represent the opinions of participating visitors.  
+        They do not represent medical, legal, scientific, or professional consensus.
+      </p>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+      <h2>Help Improve BioEthix & MedLaw</h2>
+
+      <p class="feedback-description">
+        BioEthix & MedLaw is a student-created educational project, and your feedback helps shape its development.<br><br>
+        Tell us:<br>
+        • What did you find most interesting?<br>
+        • Was anything confusing or difficult to use?<br>
+        • Which topic or case should we explore next?<br>
+        • What would make the website more useful for students?<br><br>
+        Please don't submit personal, medical, or confidential information.
+      </p>
+
+      <textarea id="feedback-text" rows="4" placeholder="Write your feedback..."></textarea>
+
+      <button class="primary-btn" onclick="submitFeedback()">Submit Feedback</button>
+
+      <div id="feedback-message"></div>
+    </section>
+
   </main>
 
   <!-- Modal -->
@@ -143,48 +188,3 @@
 
 </body>
 </html>
-
-<section class="community-vote">
-  <h2>Community Vote</h2>
-  <p class="vote-description">
-    Share your perspective on this month’s ethical dilemma.<br><br>
-    Your response is anonymous and helps us understand how students and visitors think about complex questions in medicine, technology, and law.
-  </p>
-
-  <div class="vote-buttons">
-    <button class="vote-btn" onclick="vote('up')">👍 I agree</button>
-    <button class="vote-btn" onclick="vote('down')">👎 I disagree</button>
-  </div>
-
-  <div id="vote-result" class="vote-result"></div>
-
-  <p class="vote-disclaimer">
-    <strong>Important:</strong> These results represent the opinions of participating visitors.  
-    They do not represent medical, legal, scientific, or professional consensus.
-  </p>
-</section>
-
-<section class="feedback-section">
-  <h2>Help Improve BioEthix & MedLaw</h2>
-
-  <p class="feedback-description">
-    BioEthix & MedLaw is a student-created educational project, and your feedback helps shape its development.<br><br>
-    Tell us:<br>
-    • What did you find most interesting?<br>
-    • Was anything confusing or difficult to use?<br>
-    • Which topic or case should we explore next?<br>
-    • What would make the website more useful for students?<br><br>
-    Please don’t submit personal, medical, or confidential information.
-  </p>
-
-  <textarea id="feedback-text" rows="4" placeholder="Write your feedback..."></textarea>
-
-  <button class="primary-btn" onclick="submitFeedback()">Submit Feedback</button>
-
-  <div id="feedback-message"></div>
-</section>
-
- 
-
-      
-
