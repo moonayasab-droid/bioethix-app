@@ -90,18 +90,20 @@ body {
   background: #1e293b;
   padding: 30px 40px;
   border-radius: 16px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  font-size: 3rem;
-  color: #38bdf8;
+  display: flex !important;
+  flex-direction: row !important; /* Forces side-by-side layout */
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
 }
 
-.hero-card-graphic span {
-  display: inline-flex;
-  align-items: center;
+.hero-card-graphic span, 
+.hero-card-graphic svg, 
+.hero-card-graphic img {
+  display: inline-block !important;
+  font-size: 2.5rem;
+  width: 48px;
+  height: 48px;
 }
 .card-section {
   background-color: var(--card-bg);
