@@ -29,7 +29,7 @@
 
   <main class="main-content">
     
-    <!-- Hero Section with Graphic Box -->
+  `    <!-- Hero Section -->
     <section id="home" class="hero-section">
       <div class="hero-text">
         <h1>Explore, Question.<br><span class="highlight-cyan">Think Ethically.</span></h1>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="hero-card-graphic">
-        <span>🧬 ⚖️</span>
+        <span class="graphic-icon">🧬 ⚖️</span>
       </div>
     </section>
 
@@ -52,6 +52,7 @@
           <input type="text" placeholder="Search cases...">
         </div>
       </div>
+
       <div class="filter-pills">
         <button class="pill active">All</button>
         <button class="pill">Robotics</button>
@@ -83,8 +84,9 @@
           <a href="#" class="link-blue">Read case →</a>
         </div>
       </div>
+    </section>
 
-      <div style="text-align: center;">
+      <div class="center-btn-wrapper">
         <button class="btn btn-secondary-dark">☰ View all cases</button>
       </div>
     </section>
@@ -95,6 +97,7 @@
       <p class="section-desc">Share your perspective on this month's ethical dilemma.</p>
       
       <p class="vote-question"><strong>Is AI should be used to make medical decisions?</strong></p>
+
       <div class="vote-options">
         <button class="btn btn-vote-blue">👍 I agree</button>
         <button class="btn btn-vote-purple">👎 I disagree</button>
@@ -108,7 +111,7 @@
         <div class="progress-bar">
           <div class="progress-fill" style="width: 68%;"></div>
         </div>
-        <small style="color: var(--text-muted);">Based on 124 votes</small>
+        <small class="subtext">Based on 124 votes</small>
       </div>
     </section>
 
@@ -126,7 +129,8 @@
 
       <button class="btn btn-full-cyan">📝 Share your feedback</button>
     </section>
-<!-- Project Overview & My Role Section -->
+
+    <!-- Project Overview & My Role Section -->
     <section id="about" class="card-section">
       <h2>👤 About the Project & My Role</h2>
       <div class="role-grid">
@@ -153,7 +157,7 @@
         <li>🤖 AI-generated content may be incomplete</li>
       </ul>
 
-      <a href="#" class="link-blue" style="display: inline-block; margin-top: 12px;">Read full disclaimer →</a>
+      <a href="#" class="link-blue">Read full disclaimer →</a>
     </section>
 
     <!-- Case Analyzer Section -->
@@ -162,13 +166,12 @@
       <p class="section-desc">Describe a medical law or ethics conflict to get an objective, multi-perspective analysis.</p>
 
       <div class="analyzer-input-group">
-        <textarea rows="4" placeholder="Describe the case summary and key dilemma..."></textarea>
+        <textarea placeholder="Describe the case summary and key dilemma..."></textarea>
         <button class="btn btn-full-cyan">🛠️ Analyze Case</button>
       </div>
     </section>
-
   </main>
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
 
